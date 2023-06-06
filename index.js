@@ -1,12 +1,18 @@
 const express = require('express');
 const axios = require('axios');
 const cheerio = require('cheerio');
+const cors = require('cors');
 const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// ... Rest of the code ...
+
+
 
 app.get('/scrape', async (req, res) => {
   const url = req.query.url;
