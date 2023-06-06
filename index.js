@@ -15,10 +15,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.get('/scrape', async (req, res) => {
-  const url = req.query.url;
+    const url = req.query.url;
+
+    // Set a valid User-Agent header
+    const options = {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36',
+      },
+    };
   
   try {
-    const response = await axios.get(url);
+    const response = await axios.get(url, options);
     const $ = cheerio.load(response.data);
     // Use Cheerio selectors to scrape data from the webpage
     console.log($);
