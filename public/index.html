@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>URL Scraper</title>
+</head>
+<body>
+  <h1>URL Scraper</h1>
+  <form id="urlForm">
+    <label for="urlInput">Enter URL:</label>
+    <input type="text" id="urlInput" required>
+    <button type="submit">Scrape</button>
+  </form>
+  <div id="resultContainer"></div>
+
+  <script>
+    document.getElementById('urlForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const url = document.getElementById('urlInput').value;
+      
+      try {
+        const response = await fetch(`/scrape?url=${encodeURIComponent(url)}`);
+        const data = await response.json();
+
+        document.getElementById('resultContainer').innerHTML = `<p>Title: ${data.title}</p>`;
+      } catch (error) {
+        console.error(error);
+        document.getElementById('resultContainer').innerHTML = '<p>Error scraping the URL.</p>';
+      }
+    });
+  </script>
+</body>
+</html>
