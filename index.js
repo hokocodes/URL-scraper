@@ -15,7 +15,7 @@ app.get('/scrape', async (req, res) => {
     const response = await axios.get(url);
     const $ = cheerio.load(response.data);
     // Use Cheerio selectors to scrape data from the webpage
-
+    console.log($);
     // Example: Get the page title
     const pageTitle = $('title').text();
     
